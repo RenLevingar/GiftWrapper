@@ -56,7 +56,7 @@ for(let i=0; i<length1.length; i++){
         totalLength.push(length2[i]);
     }
 }
-totalLengthUsed = 0;
+let totalLengthUsed = 0;
 totalLength.map(a => totalLengthUsed += a)
 
 console.log("The total length used: " + totalLengthUsed)
