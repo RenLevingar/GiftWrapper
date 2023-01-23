@@ -77,8 +77,9 @@ totalLength.map(a => totalLengthUsed += a)
 
 // outputs the total length
 console.log("The total length used: " + totalLengthUsed);
+
 function totalLengthDisplay(){
-    document.getElementById("lgth").innerHTML = totalLength + "ft";
+    document.getElementById("lgth").innerHTML = totalLengthUsed+ "ft";
 }
 
 // defines paper and finds what it is
