@@ -62,16 +62,10 @@ totalLength.map(a => totalLengthUsed += a)
 console.log("The total length used: " + totalLengthUsed)
 
 let paper =[];
-nums.map(a => {
-    let newNums = a.split("x");
-    paper.push(newNums);
-})
+// console.log(l, m, s);
 let ribbon = 0;
-paper.map(a => {
-    for(let i=0; i<a.length; i++){
-        a[i] = parseInt(a[i], 10);
-    }
-    ribbon += ((2*a[0] + 2*a[1]) + (2*a[0] + 2*a[2]) + (a[0]*a[1]*a[2]));
-})
+for(let i=0; i<l.length; i++){
+    ribbon += ((2*s[i] + 2*m[i]) + (2*s[i] + 2*l[i]) + (s[i]*m[i]*l[i]))
+}
 
 console.log("Ribbon length: " + ribbon);
