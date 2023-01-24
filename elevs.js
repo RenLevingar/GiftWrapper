@@ -8,11 +8,10 @@ let volume = [], surface = [];
 
 // goes through nums defining volume and surface
 nums.map(a => {
-    let newNums = a.split("x").map(x => parseInt(x, 10));
+    let newNums = a.split("x").map(x => parseInt(x, 10)).sort(function (b, c) {  return b - c;  });
     surface.push(newNums);
     volume.push(newNums[0]*newNums[1]*newNums[2]);
 })
-
 // calcs the total volume
 let totalVolume = 0;
 for(let i=0; i<volume.length; i++) {
@@ -28,11 +27,9 @@ function volumeDisplay(){
 // declares the longest, medium and smallest side
 let l = [], m = [], s = [];
 surface.forEach(a => {
-    l.push(Math.max(...a));
-    s.push(Math.min(...a));
-    a.splice(a.indexOf(l[l.length-1]), 1);
-    a.splice(a.indexOf(s[s.length-1]), 1);
-    m.push(a[0]);
+    l.push(a[2]);
+    s.push(a[0]);
+    m.push(a[1]);
 });
 
 // finds the total area and length of the paper
