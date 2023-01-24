@@ -27,25 +27,15 @@ function volumeDisplay(){
 }
 
 // declares the longest, medium and smallest side
-let l = [];
-let m = [];
-let s = [];
-
-// goes throught the suface and finds the longest, medium, and smallest side
-surface.map(a => {
-    for(let i=0; i<a.length; i++){
-        a[i] = parseInt(a[i], 10);
-    }
-    let large = a.reduce((n, b) => Math.max(n, b));
-    let small = a.reduce((n, b) => Math.min(n, b));
-    l.push(large);
-    s.push(small);
-    let biggest = a.indexOf(large);
-    a.splice(biggest, 1);
-    let smallest = a.indexOf(small);
-    a.splice(smallest, 1);
+let l = [], m = [], s = [];
+surface.forEach(a => {
+    a = a.map(x => parseInt(x, 10));
+    l.push(Math.max(...a));
+    s.push(Math.min(...a));
+    a.splice(a.indexOf(l[l.length-1]), 1);
+    a.splice(a.indexOf(s[s.length-1]), 1);
     m.push(a[0]);
-})
+});
 
 // finds the total area and length of the paper
 let totalAreaOfPaper = 0;
@@ -66,11 +56,11 @@ function totalAreaDisplay() {
 // finds the total length
 let totalLength = [];
 for(let i=0; i<length1.length; i++){
-    if(length1[i] < length2[i]){
+    if(length1[i] < length2[i])
         totalLength.push(length1[i]);
-    }else{
+    else
         totalLength.push(length2[i]);
-    }
+    
 }
 let totalLengthUsed = 0;
 totalLength.map(a => totalLengthUsed += a)
