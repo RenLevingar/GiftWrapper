@@ -4,12 +4,11 @@ let nums = "3x11x24 13x5x19 1x9x27 24x8x21 6x8x17 19x18x22 10x9x12 12x2x5 26x6x1
 nums = nums.split(" ");
 
 // declares volume and surface
-let volume = [];
-let surface = [];
+let volume = [], surface = [];
 
 // goes through nums defining volume and surface
 nums.map(a => {
-    let newNums = a.split("x");
+    let newNums = a.split("x").map(x => parseInt(x, 10));
     surface.push(newNums);
     volume.push(newNums[0]*newNums[1]*newNums[2]);
 })
@@ -29,7 +28,6 @@ function volumeDisplay(){
 // declares the longest, medium and smallest side
 let l = [], m = [], s = [];
 surface.forEach(a => {
-    a = a.map(x => parseInt(x, 10));
     l.push(Math.max(...a));
     s.push(Math.min(...a));
     a.splice(a.indexOf(l[l.length-1]), 1);
@@ -38,13 +36,11 @@ surface.forEach(a => {
 });
 
 // finds the total area and length of the paper
-let totalAreaOfPaper = 0;
-let length1 = [];
-let length2 = [];
+let length1 = [], length2 = [], totalAreaOfPaper = 0;
 for(let i = 0; i < l.length; i++){
-    length1.push((2*s[i] + l[i]));
-    length2.push((2*m[i] + 2*s[i]));
-    totalAreaOfPaper += ((2*s[i] + l[i])*(2*m[i] + 2*s[i]));
+    length1[i] = 2*s[i] + l[i];
+    length2[i] = 2*m[i] + 2*s[i];
+    totalAreaOfPaper += length1[i] * length2[i];
 }
 
 // outputs the total area
@@ -54,16 +50,8 @@ function totalAreaDisplay() {
 }
 
 // finds the total length
-let totalLength = [];
-for(let i=0; i<length1.length; i++){
-    if(length1[i] < length2[i])
-        totalLength.push(length1[i]);
-    else
-        totalLength.push(length2[i]);
-    
-}
-let totalLengthUsed = 0;
-totalLength.map(a => totalLengthUsed += a)
+let totalLength = length1.map((x, i) => x < length2[i] ? x : length2[i]);
+let totalLengthUsed = totalLength.reduce((a, b) => a + b, 0);
 
 // outputs the total length
 console.log("The total length used: " + totalLengthUsed);
@@ -71,13 +59,6 @@ console.log("The total length used: " + totalLengthUsed);
 function totalLengthDisplay(){
     document.getElementById("lgth").innerHTML = totalLengthUsed+ "ft";
 }
-
-// defines paper and finds what it is
-let paper =[];
-nums.map(a => {
-    let newNums = a.split("x");
-    paper.push(newNums);
-})
 
 // defines ribbon and finds out what it is
 let ribbon = 0;
